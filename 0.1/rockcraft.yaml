@@ -1,0 +1,22 @@
+name: metrics-proxy
+summary: Metrics Proxy for Prometheus scraping
+description: A metrics proxy server that aggregates Prometheus metrics from Kubernetes pods based on kubernetes service discovery annotations.
+license: Apache-2.0
+
+version: "0.1"
+base: "ubuntu@22.04"
+platforms:
+  amd64:
+
+services:
+  metrics-proxy:
+    override: replace
+    startup: enabled
+    command: metrics-proxy --labels="foo=bar"
+
+parts:
+  metrics-proxy:
+    plugin: go
+    source: metrics-proxy
+    build-snaps:
+      - go/1.23/stable
