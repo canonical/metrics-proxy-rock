@@ -12,7 +12,9 @@ services:
   metrics-proxy:
     override: replace
     startup: enabled
-    command: metrics-proxy --labels="foo=bar"
+    command: metrics-proxy [ args ]
+
+entrypoint-service: metrics-proxy
 
 parts:
   metrics-proxy:
