@@ -14,4 +14,4 @@ The rocks on this repository are built with [OCI Factory](https://github.com/can
 Automation takes care of:
 * validating PRs, by simply trying to build the rock;
 * pulling upstream releases, creating a PR with the necessary files to be manually reviewed;
-* releasing to GHCR at [ghcr.io/canonical/prometheus:dev](https://ghcr.io/canonical/prometheus:dev), when merging to main, for development purposes.
+* releasing to GHCR at [ghcr.io/canonical/metrics-proxy:dev](https://ghcr.io/canonical/metrics-proxy:dev), when merging to main, for development purposes.
