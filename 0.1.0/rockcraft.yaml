@@ -12,7 +12,7 @@ services:
   metrics-proxy:
     override: replace
     startup: enabled
-    command: metrics-proxy [ args ]
+    command: metrics-proxy [ ]
 
 entrypoint-service: metrics-proxy
 
