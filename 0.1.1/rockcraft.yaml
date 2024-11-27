@@ -1,0 +1,37 @@
+name: metrics-proxy
+summary: Metrics Proxy for Prometheus scraping
+description: A metrics proxy server that aggregates Prometheus metrics from Kubernetes pods based on kubernetes service discovery annotations.
+license: Apache-2.0
+
+version: "0.1.1"
+base: "ubuntu@22.04"
+platforms:
+  amd64:
+
+services:
+  metrics-proxy:
+    override: replace
+    startup: enabled
+    command: metrics-proxy
+
+
+parts:
+  metrics-proxy:
+    plugin: go
+    source: https://github.com/canonical/metrics-k8s-proxy
+    source-type: git
+    source-tag: "v0.1.1"
+    build-snaps:
+      - go/1.23/stable
+  ca-certs:
+    plugin: nil
+    overlay-packages: [ca-certificates]
+  deb-security-manifest:
+    plugin: nil
+    after:
+      - metrics-proxy
+      - ca-certs
+    override-prime: |
+      set -x
+      mkdir -p $CRAFT_PRIME/usr/share/rocks/
+      (echo "# os-release" && cat /etc/os-release && echo "# dpkg-query" && dpkg-query --admindir=$CRAFT_PRIME/var/lib/dpkg/ -f '${db:Status-Abbrev},${binary:Package},${Version},${source:Package},${Source:Version}\n' -W) > $CRAFT_PRIME/usr/share/rocks/dpkg.query
