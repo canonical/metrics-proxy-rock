@@ -12,8 +12,9 @@ services:
   metrics-proxy:
     override: replace
     startup: enabled
-    command: metrics-proxy
-
+    environment:
+      POD_LABEL_SELECTOR: foo=bar
+    command: metrics-proxy [ args ]
 
 parts:
   metrics-proxy:
