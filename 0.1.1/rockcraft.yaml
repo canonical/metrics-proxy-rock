@@ -4,7 +4,7 @@ description: A metrics proxy server that aggregates Prometheus metrics from Kube
 license: Apache-2.0
 
 version: "0.1.1"
-base: "ubuntu@22.04"
+base: "ubuntu@24.04"
 platforms:
   amd64:
 
@@ -12,8 +12,9 @@ services:
   metrics-proxy:
     override: replace
     startup: enabled
-    command: metrics-proxy
-
+    environment:
+      POD_LABEL_SELECTOR: foo=bar
+    command: metrics-proxy [ args ]
 
 parts:
   metrics-proxy:

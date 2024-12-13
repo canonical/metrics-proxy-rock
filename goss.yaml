@@ -1,0 +1,7 @@
+process:
+  metrics-proxy:
+    running: true
+http:
+  metrics:
+    status: 200
+    url: http://localhost:15090/metrics
