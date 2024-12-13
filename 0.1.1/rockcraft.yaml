@@ -12,6 +12,7 @@ services:
   metrics-proxy:
     override: replace
     startup: enabled
+    command: metrics-proxy
 
 parts:
   metrics-proxy:
