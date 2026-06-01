@@ -1,7 +1,14 @@
-process:
-  metrics-proxy:
-    running: true
-http:
-  metrics:
-    status: 200
-    url: http://localhost:15090/metrics
+# metrics-proxy requires a real Kubernetes in-cluster config (service account
+# token at /var/run/secrets/kubernetes.io/serviceaccount/token and a reachable
+# API server) to start, so we cannot assert "process running" or probe
+# http://localhost:15090/metrics from a standalone container. Until the spread
+# setup provides a k8s mock, only assert what's verifiable from the rock alone:
+# the binary is present, executable, and its --help path works.
+file:
+  /bin/metrics-proxy:
+    exists: true
+    mode: "0755"
+command:
+  metrics-proxy --help:
+    exec: /bin/metrics-proxy --help
+    exit-status: 0

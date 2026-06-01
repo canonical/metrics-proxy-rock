@@ -31,7 +31,7 @@ suites:
 
       # Load the rock into docker
       sudo rockcraft.skopeo --insecure-policy copy "oci-archive:$CRAFT_ARTIFACT" docker-daemon:rockcraft-test:latest
-      
+
     restore: |
       docker image rm --force rockcraft-test:latest
 
